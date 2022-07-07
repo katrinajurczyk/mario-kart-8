@@ -1,0 +1,52 @@
+<h1>Mario Kart 8 Builder</h1>
+
+<!-- <mat-select name="optimization">
+    <mat-option value="Max Speed"></mat-option>
+    <mat-option value="Max Accelaration"></mat-option>
+</mat-select> -->
+
+<mat-form-field appearance="fill">
+    <mat-label>Optimization</mat-label>
+    <mat-select [(ngModel)]="selectedOptimization" name="optimization" (selectionChange)="onOptChange()">
+      <mat-option *ngFor="let optimization of optsOptions" [value]="optimization">
+        {{optimization}}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<div *ngIf="selectedOptimization == 'Max Speed'">Max Speed Optimization</div>
+
+<div *ngIf="selectedOptimization == 'Max Acceleration'">Max Acceleration</div>
+
+<mat-slider min=0 max=6 defaultTabIndex="3" step="0.25" tickInterval="4"></mat-slider>
+<br>
+<mat-progress-bar value="50" valuemin="0" valuemax="6" aria-valuemin="0" aria-valuemax="6" aria-valuenow="3.5"></mat-progress-bar>
+
+<!-- <div *ngIf="selectedOptimization == ''"> -->
+    <mat-card *ngFor="let setup of obs | async">
+        <mat-card-header>
+            <mat-card-title>{{setup.driverName}}</mat-card-title>
+            <mat-card-subtitle>{{setup.bodyName}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p>Tires: {{setup.tireName}}</p>
+            <p>Glider: {{setup.gliderName}}</p>
+            <p>Speed: {{setup.speed}}</p>
+            <p>Acceleration: {{setup.acceleration}}</p>
+        </mat-card-content>
+    </mat-card>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+<!-- </div> -->
+
+<!-- <div *ngIf="selectedOptimization == 'Max Speed'">
+    <mat-card class="example-card" *ngFor="let setup of obs | async">
+        <mat-card-header>
+          <mat-card-title>{{setup.driverName}}</mat-card-title>
+          <mat-card-subtitle>{{setup.bodyName}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{setup.tireName}}</p>
+        </mat-card-content>
+      </mat-card>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div> -->
